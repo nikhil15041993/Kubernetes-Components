@@ -1,0 +1,15 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-huge-resources
+spec:
+  containers:
+  - name: app
+    image: ubuntu
+    resources:
+      limits:
+        memory: "100G"
+        cpu: "1000"
+      requests:
+        memory: "50G"
+        cpu: "500"
