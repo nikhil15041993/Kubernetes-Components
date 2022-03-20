@@ -208,7 +208,11 @@ spec:
               number: 80
               
 ```
-You define an Ingress Resource with the name hello-kubernetes-ingress. Then, you specify two host rules, so that hw1.your_domain is routed to the hello-kubernetes-first Service, and hw2.your_domain is routed to the Service from the second deployment (hello-kubernetes-second)
+You define an Ingress Resource with the name hello-kubernetes-ingress. Then, you specify two host rules, so that hw1.your_domain is routed to the hello-kuNext, you’ll need to ensure that your two domains are pointed to the Load Balancer via A records. This is done through your DNS provider.bernetes-first Service, and hw2.your_domain is routed to the Service from the second deployment (hello-kubernetes-second)
+
+
+Next, you’ll need to ensure that your two domains are pointed to the Load Balancer via A records. This is done through your DNS provider.
+
 
 Create it in Kubernetes by running the following command:
 ```
