@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-master-deployment
+  labels: 
+    app: jenkins-master
+    version: latest
+    group: jenkins
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+      matchLabels:
+        app: jenkins-master
+        version: latest
+        group: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins-master
+        version: latest
+        group: jenkins
+    spec:
+      containers:
+        - name: jenkins-master
+          image: nikhilnambiars/jenkins:latest
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: JAVA_OPTS
+            value: -Djenkins.install.runSetupWizard=false
+          ports:
+          - containerPort: 8080
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins
+      volumes:
+      - name: jenkins-home
+        persistentVolumeClaim:
+          claimName: jenkins-pv-claim
+
+
+---              
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jenkins-master
+    version: latest
+    group: jenkins
+  name: jenkins-master-service
+
+
+spec:
+
+  selector:
+    app: jenkins-master
+    version: latest
+    group: jenkins
+
+
+  ports:
+  - protocol: "TCP"
+    port: 8080
+    targetPort: 8080
+  type: NodePort      
