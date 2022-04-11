@@ -129,6 +129,13 @@ spec:
   ```
   kubectl create -f  deployment.yml
   ```
+  Create the persistent volume and persistent volume claim by using following command
+  
+  ```
+  kubectl create -f pv-pvc.yml
+  ```
+  
+  
   Use kubectl to verify the pod’s state:
 ```
    kubectl get pods
