@@ -124,6 +124,31 @@ spec:
     targetPort: 8080
   type: NodePort      
   
+  ---              
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jenkins-master
+    version: latest
+    group: jenkins
+  name: jenkins-jnlp
+
+
+spec:
+
+  selector:
+    app: jenkins-master
+    version: latest
+    group: jenkins
+
+
+  ports:
+  - protocol: "TCP"
+    port: 50000
+    targetPort: 5000
+  type: ClusterIP    
+  
   ```
   This YAML file creates a deployment using the Jenkins LTS image and also opens port 8080 and 8080
   
