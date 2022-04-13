@@ -66,4 +66,30 @@ spec:
   - protocol: "TCP"
     port: 8080
     targetPort: 8080
-  type: NodePort      
+  type: NodePort   
+  
+  
+---              
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: jenkins-master
+    version: latest
+    group: jenkins
+  name: jenkins-jnlp
+
+
+spec:
+
+  selector:
+    app: jenkins-master
+    version: latest
+    group: jenkins
+
+
+  ports:
+  - protocol: "TCP"
+    port: 50000
+    targetPort: 5000
+  type: ClusterIP     
