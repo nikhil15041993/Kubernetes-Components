@@ -30,7 +30,10 @@ spec:
           - name: JAVA_OPTS
             value: -Djenkins.install.runSetupWizard=false
           ports:
-          - containerPort: 8080
+          - name: http-port
+            containerPort: 8080
+          - name: jnlp-port
+            containerPort: 50000
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins
