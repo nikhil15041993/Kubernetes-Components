@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ssl-tls-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  tls:
+    - hosts: 
+      - a5913abcef0da431bb6f7aa808612fff-1953981868.ap-south-1.elb.amazonaws.com
+     # - frontend.52.142.236.126.nip.io # update IP address here
+      secretName: app-web-cert
+  rules:
+  - host: 
+  #- host: frontend.52.142.236.126.nip.io # update IP address here
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: webapp1-svc
+            port:
+              number: 80
