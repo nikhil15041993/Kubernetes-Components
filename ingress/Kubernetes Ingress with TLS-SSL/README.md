@@ -17,7 +17,7 @@ Many ingress controllers are supported for Kubernetes:
 * Configuring ingress to route traffic depending on the URL.
 * configuring SSL/TLS using Cert Manager
 
-## Installing an ingress controller (NGINX) into Kubernetes.
+## Step 1 Installing an ingress controller (NGINX) into Kubernetes.
 
 ### Create a namespace for the apps
 
@@ -69,7 +69,7 @@ kubectl apply -f app-ingress.yaml
 ```
 
 
-## configuring SSL/TLS using Cert Manager
+## Step 2 configuring SSL/TLS using Cert Manager
 
 ### Create a namespace for Cert Manager
 
