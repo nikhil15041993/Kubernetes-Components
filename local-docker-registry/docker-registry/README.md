@@ -49,4 +49,53 @@ openssl x509 -text -noout -in certs/domain.crt
 ## Auth base configuration
 
 if we choose auth base configuration
-install apache on master node and check the ht
+install apache on master node and check the htpasswd
+
+```
+which hdpasswd
+```
+
+```
+mkdir auth
+```
+## create a user to access the directory
+
+```
+htpasswd -Bbn testuser testpassword > auth/hdpasswd
+```
+
+next create the registry using yaml file...
+
+if you want to push/pull the image first login to the docker using htpasswd
+
+```
+docker login
+```
+
+### Run this image to kubernets pods
+
+for test the events on background
+
+```
+kubectl get events -w 
+````
+
+### create a secret
+
+```
+kubectl create secret docker-registry mydockercred --docker-server 10.0.0.1:5000 --docker-username testuser --docker-password testpassword
+```
+run a dry run for create the yaml file dry run help to reate the yaml file automatically
+
+```
+kubectl run mytest --image 10.0.0.1:5000/myimage:vi --image-pull-policy Always > /tmp/mytest.yml
+```
+
+now you can edit this  myimage.yml file
+
+
+in spec potion under containers add ``` pullImageSecrets -name: mydockercred ```
+
+
+
+
