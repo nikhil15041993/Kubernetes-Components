@@ -1,9 +1,11 @@
-Generating certificate/key pair for your private Docker registry
+## Generating certificate/key pair for your private Docker registry
+```
 mkdir certs
-Copy below content to openssl.conf
+```
+Copy below content to __openssl.conf__
 
-Update Docker Server IP with the IP address of your server where you will be running docker registry
-
+_Update **Docker Server IP** with the IP address of your server where you will be running docker registry_
+```
 [ req ]
 distinguished_name = req_distinguished_name
 x509_extensions     = req_ext
@@ -24,11 +26,14 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS = "<Docker Server IP>"
+```
 Generate the certificate and private key
-
+```
 openssl req \
  -x509 -newkey rsa:4096 -days 365 -config openssl.conf \
  -keyout certs/domain.key -out certs/domain.crt
+```
 To verify your certificate
-
+```
 openssl x509 -text -noout -in certs/domain.crt
+```
