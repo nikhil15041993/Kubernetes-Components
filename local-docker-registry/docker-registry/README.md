@@ -1,3 +1,11 @@
+
+## create the pode using docker private registry
+
+```
+kubectl run mytest --image 10.0.0.1:5000/myimage:vi --image-pull-policy Always
+```
+
+
 ## Generating certificate/key pair for your private Docker registry
 ```
 mkdir certs
@@ -37,3 +45,8 @@ To verify your certificate
 ```
 openssl x509 -text -noout -in certs/domain.crt
 ```
+
+## Auth base configuration
+
+if we choose auth base configuration
+install apache on master node and check the ht
