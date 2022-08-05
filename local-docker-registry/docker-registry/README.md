@@ -94,7 +94,7 @@ kubectl run mytest --image 10.0.0.1:5000/myimage:vi --image-pull-policy Always >
 now you can edit this  myimage.yml file
 
 
-in spec potion under containers add ``` pullImageSecrets -name: mydockercred ```
+in spec potion under containers add ``` ImagePullSecrets -name: mydockercred ```
 
 
 
