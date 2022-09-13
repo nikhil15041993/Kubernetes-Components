@@ -75,3 +75,39 @@ spec:
 kubectl create -f persistentVolumeClaim.yaml
 ```
 
+# How to Delete PV(Persistent Volume) and PVC(Persistent Volume Claim) stuck in terminating state?
+
+ When you are planning to delete the Persistent Volume as well as Persistent Volume Claim then you must follow an order -
+
+* First delete - Persistent Volume Claim
+* Second delete- Persistent Volume
+
+
+Delete Reclaim Policy- There are two types of volume provisioning in Kubernetes Static and Dynamic.
+
+* Static Volume Provisioning - You have to manually configure the PV, PVC but when you need to delete both PV, PVC then you must start from PVC and then go for PV.
+* Dynamic Volume Provisioning - You have to set up Storage Class along with PVC and Storage Class will take of dynamic provisioning of PV(Persistent Volume). If you delete the PVC(Persistent Volume Claim) then all the PV(Persistent Volume) provisioned dynamically will be deleted.
+
+
+Each Kubernetes resource running in the cluster has Finalizers associated with it.
+
+Finalizers prevent accidental deletion of resources(Persistent Volume, Persistent Volume Claim, POD, etc..)
+If you accidentally issue kubectl delete command on Kubernetes resource and if there is a finalizer associated with that resource then it is going to put the resource in Read-Only mode and prevent it from deletion.
+
+So if your Kubernetes resource such as Persistent Volume, Persistent Volume Claim, or POD is stuck in the terminating state then you must remove the Finalizer from that resource and after removing the Finalizer you should be able to delete the resource.
+
+
+##  How to remove the Finalizer from Persistent Volume, Persistent Volume Claim or POD
+
+To remove the Finalizer you have to use the ```kubectl patch command``` with the exact resource name.
+
+```
+kubectl patch pv <pv name> -p '{"metadata":{"finalizers":null}}'
+```
+
+Similarly, if your Persistent Volume Claim is stuck in Terminating state then run the following kubectl patch command to remove the Finalizer -
+```
+kubectl patch pvc <pvc name> -p '{"metadata":{"finalizers":null}}'
+```
+
+Now after patching both Persistent Volume Claim and Persistent Volume, you can delete both the resources.
