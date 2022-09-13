@@ -111,3 +111,6 @@ kubectl patch pvc <pvc name> -p '{"metadata":{"finalizers":null}}'
 ```
 
 Now after patching both Persistent Volume Claim and Persistent Volume, you can delete both the resources.
+
+
+This Same command  we can use on  storage class also
