@@ -108,3 +108,90 @@ to Access the Grafana dashboard we need to find Public IP address and for that u
 kubectl get service -n grafana 
 ```
 Copy the Public IP address and open it in the browser -
+
+
+## Deploy a spring boot microservice and monitor it on Grafana
+To deploy the spring boot on kubernetes cluster user the following kubectl command
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jhooq-springboot
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jhooq-springboot
+  template:
+    metadata:
+      labels:
+        app: jhooq-springboot
+    spec:
+      containers:
+        - name: springboot
+          image: rahulwagh17/kubernetes:jhooq-k8s-springboot
+
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "512m"
+            limits:
+              memory: "128Mi"
+              cpu: "512m"
+
+          ports:
+            - containerPort: 8080
+
+          readinessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          startupProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            failureThreshold: 30
+            periodSeconds: 10
+
+          env:
+            - name: PORT
+              value: "8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jhooq-springboot
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: jhooq-springboot
+```
+
+Then create the application by 
+```
+kubectl apply -f k8s-spring-boot-deployment.yml 
+```
+
+## Verify the deployment by running the following kubectl command
+```
+kubectl get deployment jhooq-springboot
+```
+```
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+jhooq-springboot   2/2     2            2           8m5s
+```
+
+Refresh the grafana dashboard to verify the deployment
