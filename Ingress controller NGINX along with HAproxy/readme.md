@@ -1,6 +1,6 @@
 # Setting up Ingress controller NGINX along with HAproxy for Microservice deployed inside Kubernetes cluster
 
-![alt text]([http://url/to/img.png](https://jhooq.com/wp-content/uploads/2020/07/Screenshot-2020-07-28-at-16.23.14-1024x634.jpg)
+![Alt text](https://jhooq.com/wp-content/uploads/2020/07/Screenshot-2020-07-28-at-16.23.14-1024x634.jpg)
 
 ## 1. Setup kubernetes Cluster
 The first and most essential step up for you is - "You should have a kuberentes cluster setup and it should be running. "
