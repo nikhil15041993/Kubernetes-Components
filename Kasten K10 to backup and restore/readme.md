@@ -86,3 +86,13 @@ Wait for the operation to complete, then you will see one restore point availabl
 
 ### Restore
 Click on the restore point you want to restore to. If there is more than the one, you will see all the restore points here. Clicking on Today, restore point will start operation to restore.
+
+You will see the process in the dashboard as it starts the restoring process.
+
+### Using Backup Policies
+
+We have seen the workflow of backup using the manual method, another method is to use the backup policies to make daily, weekly, or hourly backups. You can set the backup and snapshot retention schedule independently for detailed control over how often backups are performed and the amount of total storage they consume.
+
+Click on create policies. You will see the policy creation sidebar. Policies are extremely configurable, and multiple options are available.
+
+When a policy is applied to the application, this executes a backup for the first time. The application’s compliance with the policy is reported in the application card. You will see the application is then compliant with all the policies.
