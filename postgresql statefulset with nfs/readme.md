@@ -113,4 +113,66 @@ spec:
       resources:
         requests:
           storage: 100Mi
-      ```
+```
+
+
+
+
+## app.yaml
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: techibeans
+spec:
+  selector: 
+    app: techibeans-app
+    tier: frontend
+  ports:
+  - protocol: "TCP" 
+    port: 5000
+    targetPort: 5000
+  type: NodePort
+
+
+
+
+---
+apiVersion: apps/v1
+kind : Deployment
+metadata: 
+  name: techibeans
+  labels:
+    app: techibeans-app
+    tier: frontend
+
+
+spec:
+  selector:
+    matchLabels:
+      app: techibeans-app
+      tier: frontend
+
+  strategy:
+    type: Recreate
+
+  replicas: 1
+
+  template:
+    metadata:
+      labels:
+        app: techibeans-app
+        tier: frontend
+
+    spec:
+      containers:
+      - image: nikhilnambiars/techibeans:v1    
+        name: techibeans
+        env: 
+          - name: DATABASE_URL
+            value: postgresql+psycopg2://test:test@backend/test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+```
