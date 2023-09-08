@@ -29,7 +29,7 @@ service_name: '' #service_name
 ```
 
 
-Add the acquired VM IP addresses to the [servers:children] section of the inventory file to ensure the playbook operates in accordance with these IPs.
+Add the obtained VM IP addresses to the [servers:children] section of the inventory file to ensure the playbook operates in accordance with these IPs
 
 
 ### Configure couples of variables in inventory file
