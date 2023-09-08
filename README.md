@@ -1,7 +1,5 @@
 # Kubernetes-Components
 
-
-
 NOTE: When deploying container in Proxmox, we need to comment the SWAP and OS high performance modules in the create_pushpin/roles/prepare/tasks/main.yml file.
 
 We have to make sure that the OS version of our VM is 20.04 LTS and Set swap_vars_size to "8G" also swappines 60.
@@ -49,7 +47,8 @@ Add the recently acquired VM IP addresses within the [servers:children] section 
 
 ### configure SSL
 
-To configure the SSL certificate for Nginx, create an SSL certificate based on the domain name and then define it in the 'all.yml' file.
+To configure the SSL certificate for Nginx, generate an SSL certificate using the domain name defined in the 'group_vars/all.yml' file.
+
 ```
 domain_name: "statemine.public.curie.radiumblock.co" #domain name
 ```
@@ -62,3 +61,14 @@ fullchain.pem will be certs file
 privkey.pem will be key file
 ```
 
+### Run ansible playbook in dry mode.
+
+```
+ansible-playbook -i inventory main.yml --check -v
+```
+
+**Run ansible playbook.**
+
+```
+ansible-playbook -i inventory main.yml -v
+```
