@@ -2,7 +2,7 @@
 
 NOTE: When deploying container in Proxmox, we need to comment the SWAP and OS high performance modules in the create_pushpin/roles/prepare/tasks/main.yml file.
 
-We have to make sure that the OS version of our VM is 20.04 LTS and Set swap_vars_size to "8G" also swappines 60.
+We have to make sure that the OS version of our VM is 20.04 and Set swap size to "8G" also swappines 60.
 
 This playbook is for setup pushpin.
 
@@ -28,7 +28,9 @@ awsregionname: '' #aws access key for sqs
 service_name: '' #service_name
 ```
 
-Add the recently acquired VM IP addresses within the [servers:children] section of the inventory file to ensure the playbook runs according to these IPs
+
+Add the acquired VM IP addresses to the [servers:children] section of the inventory file to ensure the playbook operates in accordance with these IPs.
+
 
 ### Configure couples of variables in inventory file
 
@@ -72,3 +74,7 @@ ansible-playbook -i inventory main.yml --check -v
 ```
 ansible-playbook -i inventory main.yml -v
 ```
+
+
+
+
