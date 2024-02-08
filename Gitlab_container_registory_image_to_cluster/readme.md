@@ -1,15 +1,11 @@
 # create a Kubernetes Secret for accessing a GitLab Container Registry and then use that Secret in a Deployment manifest.
 
-    Create Docker Config JSON File:
+Create Docker Config JSON File:
+Suppose you have logged in to your GitLab Container Registry using Docker and have the Docker configuration file (config.json) located at ~/.docker/config.json.
 
-    Suppose you have logged in to your GitLab Container Registry using Docker and have the Docker configuration file (config.json) located at ~/.docker/config.json.
-
-    Create Kubernetes Secret:
-
-    Run the following command to create a Kubernetes Secret named gitlab-registry-secret:
-
+Create Kubernetes Secret:
+Run the following command to create a Kubernetes Secret named gitlab-registry-secret:
 ```
-
 kubectl create secret generic gitlab-registry-secret \
     --from-file=.dockerconfigjson=$HOME/.docker/config.json \
     --type=kubernetes.io/dockerconfigjson
