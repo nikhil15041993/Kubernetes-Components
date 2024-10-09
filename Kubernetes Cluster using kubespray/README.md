@@ -1,6 +1,6 @@
 ## Step 1: Provision the VMs using Vagrant
 
-First we need to provision the VMs using vagrant.
+First we need to provision the VMs using vagrant
 
 We will be setting up total 3 VMs (Virtual Machine) with its unique IP -
 
